@@ -113,7 +113,12 @@ h2 {
 }
 /* buttons
 ========== */
-
+#resetBtn, #rollBtn {
+  display: none;
+}
+#startBtn {
+  background: var(--white);
+}
 #rollBtn {
   background: var(--yellow);
 }
@@ -121,9 +126,7 @@ h2 {
   background: var(--orange);
   color: var(--yellow)
 }
-#resetBtn, #rollBtn {
-  display: none;
-}
+
 button, button:visited  {
   border-radius: 10px;
   border: none;
