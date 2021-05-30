@@ -3,7 +3,7 @@ const gameBoard = document.getElementById('gameBoard')
 const message = document.getElementById('message')
 
 const badWitchScoreboard = document.getElementById('badWitchScoreboard')
-const ggoodWitchScoreboard = document.getElementById('goodWitchScoreboard')
+const goodWitchScoreboard = document.getElementById('goodWitchScoreboard')
 
 const badWitchCurrentScore = document.getElementById('badWitchCurrentScore')
 const goodWitchCurrentScore = document.getElementById('goodWitchCurrentScore')
@@ -20,10 +20,10 @@ const bottomDie = document.getElementById('bottom-die')
 let badWitchScore = 0
 let goodWitchScore = 0
 let badWitchTurn = false
+// let goodWitchTurn = false
 
 // reusable functions
 function animate(){
-
 topDie.classList.add("animate-dice-left") 
 bottomDie.classList.add("animate-dice-right")
 
@@ -36,22 +36,45 @@ void bottomDie.offsetWidth
 
 topDie.classList.add("animate-dice-left") 
 bottomDie.classList.add("animate-dice-right")
-
-
 }
-// event listeners
+function gameOver(){
+    rollBtn.style.display = "none"
+    resetBtn.style.display = "block"
+    topDie.textContent = "👻"
+    bottomDie.textContent = "👻"
+}
+function resetGame(){
+    resetBtn.style.display = "none"
+    startBtn.style.display = "block"
+    badWitchScore = 0
+    goodWitchScore = 0
+    badWitchTurn = false
+    message.innerText = "First witch to 42 wins!"
+    badWitchScoreboard.classList.remove('active')
+    goodWitchScoreboard.classList.remove('active')
+    badWitchCurrentScore.textContent = '0'
+    goodWitchCurrentScore.textContent = '0'
+    
+}
 
+// event listeners
+// ===============
+resetBtn.addEventListener('click', function(){
+    resetGame()
+})
 startBtn.addEventListener('click', function(){
-    const whichWitchNumber = Math.floor(Math.random() * 2) + 1
+    const pickWitch = Math.floor(Math.random() * 2) + 1
     startBtn.style.display = "none"
     rollBtn.style.display = "block"
-    if (whichWitchNumber === 1){
+    
+
+    if (pickWitch === 1){
         badWitchTurn = true
         message.innerText = "Bad Witch goes first"
-        goodWitchScoreBoard.classList.remove('box-shadow')
+        badWitchScoreboard.classList.add('active')
     } else  {
         message.innerText = "Good Witch goes first"
-        badWitchScoreBoard.classList.remove('box-shadow')
+        goodWitchScoreboard.classList.add('active')
     }
 })
 
@@ -64,17 +87,34 @@ rollBtn.addEventListener('click', function () {
 
     if (badWitchTurn){
         badWitchCurrentScore.textContent = badWitchScore += numberTotal
-        badWitchScoreBoard.classList.remove('box-shadow')
-        goodWitchScoreBoard.classList.add('box-shadow')
+        badWitchScoreboard.classList.remove('active')
+        goodWitchScoreboard.classList.add('active')
+        message.innerText = "Good Witch Turn"
         
     } else {
         goodWitchCurrentScore.textContent = goodWitchScore += numberTotal
-        badWitchScoreBoard.classList.add('box-shadow')
-        goodWitchScoreBoard.classList.remove('box-shadow') 
+        badWitchScoreboard.classList.add('active')
+        goodWitchScoreboard.classList.remove('active')
+        message.innerText = "Bad Witch Turn"
+        
+    }
+    animate()
+    if (badWitchScore >= 42){
+        message.innerText = "Bad Witch wins! ✨🌛"
+        badWitchScoreboard.classList.add('active')
+        goodWitchScoreboard.classList.remove('active')
+        gameOver()
+        
+    }
+    else if (goodWitchScore >= 42) {
+        message.innerText = "Good Witch wins! ✨🌛"
+        goodWitchScoreboard.classList.add('active')
+        badWitchScoreboard.classList.remove('active')
+        gameOver()
     }
         badWitchTurn = !badWitchTurn
-        animate()
+        
     })
         
 
-// console.log(badWitch)
+

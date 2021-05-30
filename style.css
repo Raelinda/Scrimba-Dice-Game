@@ -119,17 +119,19 @@ h2 {
 }
 #resetBtn {
   background: var(--orange);
+  color: var(--yellow)
 }
-#resetBtn, #startBtn {
+#resetBtn, #rollBtn {
   display: none;
 }
 button, button:visited  {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, .4) inset;
   cursor: pointer;
   font-size: 1.5rem;
-  border: none;
-  border-radius: 10px;
+  min-width: 160px;
   padding: .35em .6em;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, .4) inset;
 }
 button:hover
  {
@@ -179,7 +181,7 @@ header {
   font-size: 1.5rem;
 
 }
-.box-shadow {
+.active {
   box-shadow: 0 0 25px -2px;
 }
 #badWitchScoreboard,
