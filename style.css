@@ -1,6 +1,6 @@
 /* / *===========
 CSS reset - Start
-================= */ 
+================= */
 
 /* Box sizing rules */
 *,
@@ -44,6 +44,7 @@ body {
 a {
   text-decoration: none;
 }
+
 /* Make images easier to work with */
 img,
 picture {
@@ -103,31 +104,38 @@ body {
 /* typography
 ============= */
 
- h1 {
-  margin-bottom: .75em;
+h1 {
+  margin-bottom: .5em;
   color: var(--yellow);
 }
+
 h2 {
-  font-size: 1.75rem;
-  line-height: 1;
+  font-size: 1.5rem;
+  line-height: .8;
 }
+
 /* buttons
 ========== */
-#resetBtn, #rollBtn {
+#resetBtn,
+#rollBtn {
   display: none;
 }
+
 #startBtn {
   background: var(--white);
 }
+
 #rollBtn {
   background: var(--yellow);
 }
+
 #resetBtn {
   background: var(--orange);
   color: var(--yellow)
 }
 
-button, button:visited  {
+button,
+button:visited {
   border-radius: 10px;
   border: none;
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, .4) inset;
@@ -136,22 +144,44 @@ button, button:visited  {
   min-width: 160px;
   padding: .35em .6em;
 }
-button:hover
- {
- box-shadow: 0 0 7px 4px rgba(360, 360, 360, .4) inset;
+
+button:hover {
+  box-shadow: 0 0 7px 4px rgba(360, 360, 360, .4) inset;
 }
+
+/* reusable classes
+=================== */
+
+.container {
+  margin: 0 auto;
+  width: min(95%, 325px);
+  min-height: 80vh;
+}
+.active {
+  box-shadow: 0 0 25px -2px;
+}
+.game-mode {
+  background: var(--orange);
+  box-shadow: 0 0 10px 5px var(--yellow);
+}
+
+.message-mode {
+  background: #000;
+  box-shadow: 0 0 15px 10px var(--orange);
+  color: var(--yellow);
+  font-size: 1.5rem;
+}
+
+
 
 /* layout
 ========= */
-.container {
-  margin: 0 auto;
-  width: min(85%, 325px);
-  min-height: 80vh;
-}
+
 header {
   width: min(90%, 700px);
-  margin: 0 auto .5rem;
+  margin: 1.5rem auto .5rem;
 }
+
 .title {
   max-width: 100%;
   margin: .5rem 0 .75rem;
@@ -166,41 +196,33 @@ header {
   padding: 1rem 0;
   max-width: 100%;
 }
+
 .game-board__content {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
   margin: 0 auto;
 }
-.game-mode {
-  background: var(--orange);
-  box-shadow: 0 0 10px 5px var(--yellow);
-}
-.message-mode {
-  background: #000;
-  box-shadow: 0 0 15px 10px var(--orange);
-  color: var(--yellow);
-  font-size: 1.5rem;
 
-}
-.active {
-  box-shadow: 0 0 25px -2px;
-}
+
 #badWitchScoreboard,
 #goodWitchScoreboard {
   background: var(--yellow);
-  padding: 1em 0;
+  padding: .75em 0;
   border-radius: 10px;
-  width: min(80%, 200px);
+  min-width: 45%;
 }
+
 #goodWitchScoreboard {
-  margin-top: 1rem;
+  margin-left: .75rem;
 }
+
 #badWitchCurrentScore,
 #goodWitchCurrentScore {
   font-size: 4rem;
 }
+
 /* game play
 ============ */
 #game-play {
@@ -210,8 +232,9 @@ header {
   justify-content: center;
   align-items: center;
   max-width: 100%;
-  
+
 }
+
 /* dice */
 #game-play__dice {
   font-size: 2.5rem;
@@ -222,25 +245,31 @@ header {
   margin-right: .5rem;
 
 }
+
 @keyframes diceRollRight {
   50% {
     transform: rotate(90deg)
   }
+
   100% {
     transform: rotate(180deg);
   }
 }
+
 @keyframes diceRollLeft {
   50% {
     transform: rotate(-90deg)
   }
+
   100% {
     transform: rotate(-180deg);
   }
 }
+
 .animate-dice-right {
   animation: diceRollRight 300ms ease-out 2;
 }
+
 .animate-dice-left {
   animation: diceRollLeft 300ms ease-out 2;
 }
@@ -254,41 +283,55 @@ header {
   font-weight: bold;
   width: 50px;
 }
+
 #top-die {
   margin: 0 .5em .5em 1em;
   /* transform: rotate(45deg); */
 }
+
 #bottom-die {
-  margin-top:.5em;
+  margin-top: .5em;
   /* transform: rotate(45deg); */
-  
+
 }
 
 
 /* media Queries */
-@media (min-width: 43.75em) {
+@media (min-width: 40.625em) {
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: .75em;
     color: var(--yellow);
   }
-  #game-board {
-    width: 80%;
-    padding: 2rem 0;
-    margin: 0 auto;
+
+  h2 {
+    font-size: 2rem;
   }
-  .game-board__content {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
+
   .container {
     margin: 0 auto;
     width: min(85%, 700px);
     min-height: 70vh;
   }
 
-#goodWitchScoreboard {
-  margin: 0 0 0 2rem;
-}
+  #gameBoard {
+    width: 80%;
+    padding: 2rem;
+    margin: 0 auto;
+  }
+
+  .game-board__content {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #badWitchScoreboard,
+  #goodWitchScoreboard {
+    width: min(80%, 200px);
+  }
+  #goodWitchScoreboard {
+    margin-left: 1rem;
+  }
+
 }
