@@ -1,0 +1,289 @@
+/* / *===========
+CSS reset - Start
+================= */ 
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+
+/* Remove list styles & padding on ul & ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'],
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+}
+
+
+/* removes default underline from links */
+a {
+  text-decoration: none;
+}
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ============
+===============
+CSS reset - End
+===============
+=============== */
+
+/* fonts
+======== */
+/* im-fell-dw-pica-regular - latin */
+@font-face {
+  font-family: 'IM Fell DW Pica';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/im-fell-dw-pica-v12-latin-regular.woff') format('woff')
+}
+
+/* im-fell-dw-pica-italic - latin */
+@font-face {
+  font-family: 'IM Fell DW Pica';
+  font-style: italic;
+  font-weight: 400;
+  src: url('fonts/im-fell-dw-pica-v12-latin-italic.woff') format('woff')
+}
+
+/* body basics
+============== */
+:root {
+  --orange: #f45402;
+  --yellow: #fdda34;
+  --button-hover: #666;
+  --white: #fefefe;
+}
+
+body {
+  background: url('images/Background-desk.jpg') no-repeat center;
+  background-size: cover;
+  font-family: 'IM Fell DW Pica', serif;
+  text-align: center;
+}
+
+/* typography
+============= */
+
+ h1 {
+  margin-bottom: .75em;
+  color: var(--yellow);
+}
+h2 {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+/* buttons
+========== */
+
+#rollBtn {
+  background: var(--yellow);
+}
+#resetBtn {
+  background: var(--orange);
+}
+#resetBtn, #startBtn {
+  display: none;
+}
+button, button:visited  {
+  cursor: pointer;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 10px;
+  padding: .35em .6em;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, .4) inset;
+}
+button:hover
+ {
+ box-shadow: 0 0 7px 4px rgba(360, 360, 360, .4) inset;
+}
+
+/* layout
+========= */
+.container {
+  margin: 0 auto;
+  width: min(85%, 325px);
+  min-height: 80vh;
+}
+header {
+  width: min(90%, 700px);
+  margin: 0 auto .5rem;
+}
+.title {
+  max-width: 100%;
+  margin: .5rem 0 .75rem;
+}
+
+/* game board
+======= */
+
+#gameBoard {
+  border-radius: 10px;
+  line-height: 1;
+  padding: 1rem 0;
+  max-width: 100%;
+}
+.game-board__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+.game-mode {
+  background: var(--orange);
+  box-shadow: 0 0 10px 5px var(--yellow);
+}
+.message-mode {
+  background: #000;
+  box-shadow: 0 0 15px 10px var(--orange);
+  color: var(--yellow);
+  font-size: 1.5rem;
+
+}
+.box-shadow {
+  box-shadow: 0 0 25px -2px;
+}
+#badWitchScoreboard,
+#goodWitchScoreboard {
+  background: var(--yellow);
+  padding: 1em 0;
+  border-radius: 10px;
+  width: min(80%, 200px);
+}
+#goodWitchScoreboard {
+  margin-top: 1rem;
+}
+#badWitchCurrentScore,
+#goodWitchCurrentScore {
+  font-size: 4rem;
+}
+/* game play
+============ */
+#game-play {
+  margin: 2rem 0;
+  display: flex;
+  flex: row;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  
+}
+/* dice */
+#game-play__dice {
+  font-size: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: .5rem;
+
+}
+@keyframes diceRollRight {
+  50% {
+    transform: rotate(90deg)
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+@keyframes diceRollLeft {
+  50% {
+    transform: rotate(-90deg)
+  }
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+.animate-dice-right {
+  animation: diceRollRight 300ms ease-out 2;
+}
+.animate-dice-left {
+  animation: diceRollLeft 300ms ease-out 2;
+}
+
+#top-die,
+#bottom-die {
+  background: var(--white);
+  border-radius: 5px;
+  height: 50px;
+  font-family: monospace;
+  font-weight: bold;
+  width: 50px;
+}
+#top-die {
+  margin: 0 .5em .5em 1em;
+  /* transform: rotate(45deg); */
+}
+#bottom-die {
+  margin-top:.5em;
+  /* transform: rotate(45deg); */
+  
+}
+
+
+/* media Queries */
+@media (min-width: 43.75em) {
+  h1 {
+    font-size: 3rem;
+    margin-bottom: .75em;
+    color: var(--yellow);
+  }
+  #game-board {
+    width: 80%;
+    padding: 2rem 0;
+    margin: 0 auto;
+  }
+  .game-board__content {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    margin: 0 auto;
+    width: min(85%, 700px);
+    min-height: 70vh;
+  }
+
+#goodWitchScoreboard {
+  margin: 0 0 0 2rem;
+}
+}
