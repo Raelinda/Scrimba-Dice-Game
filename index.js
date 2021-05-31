@@ -20,30 +20,37 @@ const bottomDie = document.getElementById('bottom-die')
 let badWitchScore = 0
 let goodWitchScore = 0
 let badWitchTurn = false
-// let goodWitchTurn = false
+
 
 // reusable functions
-function animate(){
-topDie.classList.add("animate-dice-left") 
-bottomDie.classList.add("animate-dice-right")
+function animate() {
+    topDie.classList.add("animate-dice-left")
+    bottomDie.classList.add("animate-dice-right")
 
-topDie.classList.remove("animate-dice-left") 
-bottomDie.classList.remove("animate-dice-right")
+    topDie.classList.remove("animate-dice-left")
+    bottomDie.classList.remove("animate-dice-right")
 
-// trigger a DOM reflow 
-void topDie.offsetWidth
-void bottomDie.offsetWidth
+    // trigger a DOM reflow 
+    void topDie.offsetWidth
+    void bottomDie.offsetWidth
 
-topDie.classList.add("animate-dice-left") 
-bottomDie.classList.add("animate-dice-right")
+    topDie.classList.add("animate-dice-left")
+    bottomDie.classList.add("animate-dice-right")
 }
-function gameOver(){
+
+function active(remove, add) {
+    remove.classList.remove('active')
+    add.classList.add('active')
+}
+
+function gameOver() {
     rollBtn.style.display = "none"
     resetBtn.style.display = "block"
     topDie.textContent = "👻"
     bottomDie.textContent = "👻"
 }
-function resetGame(){
+
+function resetGame() {
     resetBtn.style.display = "none"
     startBtn.style.display = "block"
     badWitchScore = 0
@@ -54,25 +61,25 @@ function resetGame(){
     goodWitchScoreboard.classList.remove('active')
     badWitchCurrentScore.textContent = '0'
     goodWitchCurrentScore.textContent = '0'
-    
+
 }
 
 // event listeners
 // ===============
-resetBtn.addEventListener('click', function(){
+resetBtn.addEventListener('click', function () {
     resetGame()
 })
-startBtn.addEventListener('click', function(){
+startBtn.addEventListener('click', function () {
     const pickWitch = Math.floor(Math.random() * 2) + 1
     startBtn.style.display = "none"
     rollBtn.style.display = "block"
-    
 
-    if (pickWitch === 1){
+
+    if (pickWitch === 1) {
         badWitchTurn = true
         message.innerText = "Bad Witch goes first"
         badWitchScoreboard.classList.add('active')
-    } else  {
+    } else {
         message.innerText = "Good Witch goes first"
         goodWitchScoreboard.classList.add('active')
     }
@@ -85,36 +92,30 @@ rollBtn.addEventListener('click', function () {
     bottomDie.textContent = randomNumber2
     let numberTotal = randomNumber1 + randomNumber2
 
-    if (badWitchTurn){
+    if (badWitchTurn) {
         badWitchCurrentScore.textContent = badWitchScore += numberTotal
-        badWitchScoreboard.classList.remove('active')
-        goodWitchScoreboard.classList.add('active')
+        active(badWitchScoreboard, goodWitchScoreboard)
         message.innerText = "Good Witch Turn"
-        
+
     } else {
         goodWitchCurrentScore.textContent = goodWitchScore += numberTotal
-        badWitchScoreboard.classList.add('active')
-        goodWitchScoreboard.classList.remove('active')
+        active(goodWitchScoreboard, badWitchScoreboard)
         message.innerText = "Bad Witch Turn"
-        
+
     }
+
     animate()
-    if (badWitchScore >= 42){
+
+    if (badWitchScore >= 42) {
         message.innerText = "Bad Witch wins! ✨🌛"
-        badWitchScoreboard.classList.add('active')
-        goodWitchScoreboard.classList.remove('active')
+        active(goodWitchScoreboard, badWitchScoreboard)
         gameOver()
-        
-    }
-    else if (goodWitchScore >= 42) {
+
+    } else if (goodWitchScore >= 42) {
         message.innerText = "Good Witch wins! ✨🌛"
-        goodWitchScoreboard.classList.add('active')
-        badWitchScoreboard.classList.remove('active')
+        active(badWitchScoreboard, goodWitchScoreboard)
         gameOver()
     }
-        badWitchTurn = !badWitchTurn
-        
-    })
-        
+    badWitchTurn = !badWitchTurn
 
-
+})
