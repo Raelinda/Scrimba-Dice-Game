@@ -23,6 +23,11 @@ let badWitchTurn = false
 
 
 // reusable functions
+function diceRoll(number1, number2){
+    topDie.textContent = number1
+    bottomDie.textContent = number2
+}
+
 function animate() {
     topDie.classList.add("animate-dice-left")
     bottomDie.classList.add("animate-dice-right")
@@ -85,21 +90,25 @@ startBtn.addEventListener('click', function () {
     }
 })
 
-rollBtn.addEventListener('click', function () {
+rollBtn.addEventListener('click', function() {
     const randomNumber1 = Math.floor(Math.random() * 6) + 1
     const randomNumber2 = Math.floor(Math.random() * 6) + 1
-    topDie.textContent = randomNumber1
-    bottomDie.textContent = randomNumber2
-    let numberTotal = randomNumber1 + randomNumber2
+    const cursedNumber1 = Math.floor(Math.random() * 4) + 1
+    const cursedNumber2 = Math.floor(Math.random() * 4) + 1
+
+    let randomNumberTotal = randomNumber1 + randomNumber2
+    let cursedNumberTotal = cursedNumber1 + cursedNumber2
 
     if (badWitchTurn) {
-        badWitchCurrentScore.textContent = badWitchScore += numberTotal
+        diceRoll(randomNumber1, randomNumber2)
         active(badWitchScoreboard, goodWitchScoreboard)
+        badWitchCurrentScore.textContent = badWitchScore += randomNumberTotal
         message.innerText = "Good Witch Turn"
 
     } else {
-        goodWitchCurrentScore.textContent = goodWitchScore += numberTotal
+        diceRoll(cursedNumber1, cursedNumber2)
         active(goodWitchScoreboard, badWitchScoreboard)
+        goodWitchCurrentScore.textContent = goodWitchScore += cursedNumberTotal
         message.innerText = "Bad Witch Turn"
 
     }
